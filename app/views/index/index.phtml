@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-xs-3">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="set-height-wrap">
+                    <!-- Todo-List -->
+                    <p class="text-center text-danger">Damkar Di Pekanbaru</p>
+                    <ul class="todo-list nicescroll-bar">
+                        <?php $data = LokasiPemkar::find(['order' => "id DESC"]); ?>
+                        <?php foreach ($data as $lokasi): ?>
+                            <li class="todo-item">
+                                <div class="checkbox checkbox-default">
+                                    <input type="checkbox" id="checkbox01"/>
+                                    <a href="<?= $this->url->get('') ?>"><?= $lokasi->nama ?></a>
+                                </div>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <!-- /Todo-List -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-8">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table id="myTable1" class="table table-hover display  pb-30">
+                            <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Status Pelaporan</th>
+                                <th>Nama Pelapor</th>
+                                <th>Lokasi</th>
+                                <th>Waktu Palaporan</th>
+                                <th>Deksripsi</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>No</th>
+                                <th>Status Pelaporan</th>
+                                <th>Nama Pelapor</th>
+                                <th>Lokasi</th>
+                                <th>Waktu Palaporan</th>
+                                <th>Deksripsi</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                            <?php $no = 1;
+                            foreach ($lokasis as $datas): ?>
+                                <tr>
+                                    <td><?= $no ?></td>
+                                    <td><?php
+                                        if ($datas->status == "Belum Ditanggapi"):
+                                            ?>
+                                            <a href="<?= $this->url->get('index/tanggapi/'.$datas->id_laporan) ?>">
+                                                <span class="text-danger"><?= $datas->status ?></span>
+                                            </a>
+                                        <?php else: ?>
+                                            <span class="text-warning"><?= $datas->status ?></span>
+
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?= $datas->id_user?></td>
+                                    <td><?= $datas->lokasi ?></td>
+                                    <td><?= $datas->waktu_pelaporan ?></td>
+                                    <td><?= $datas->deskripsi ?></td>
+                                </tr>
+                                <?php $no++; endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
